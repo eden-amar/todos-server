@@ -1,13 +1,13 @@
 const {readFileSync, writeFileSync} = require('fs'); // return the text
 
 function getTodos() {
-    const value = JSON.parse(readFileSync('./data.json').toString());
+    const value = JSON.parse(readFileSync('./data/todos-data.json').toString());
    return value;
 }
 
 function setTodos(todos){ // set the text to the new todos
     const value = JSON.stringify(todos);
-    writeFileSync('./data.json', value);
+    writeFileSync('./data/todos-data.json', value);
 }
 
 function addTodo({isDone, id, task, user}){

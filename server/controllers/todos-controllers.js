@@ -1,6 +1,5 @@
 const todoService = require('../services/todos.js');
 
-const { displayTodos } = require('./cmd.js');
 
 function getTodos (req,res)  {
     const getTodo = todoService.getTodos();

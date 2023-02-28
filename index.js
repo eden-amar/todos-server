@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express(); // express application
 const cors = require('cors');
-const todosRouter = require('./routes/todos-router.js');
+const todosRouter = require('./server/routes/todos-router');
 
 app.use(express.json());
 app.use(cors())
