@@ -105,7 +105,7 @@
                     break;
                 case 'delete':
                     let trashIcon = document.createElement('img');
-                    trashIcon.src = './delete.png';
+                    trashIcon.src = './img/delete.png';
 
                     trashIcon.addEventListener('click', () => {
                         fetch(`http://localhost:3000/api/todos ${todoData.id}`)
@@ -115,7 +115,7 @@
                     break;
                 case 'update':
                     let updateIcon = document.createElement('img');
-                    updateIcon.src = './update.png';
+                    updateIcon.src = './img/update.png';
                     
                     td.append(updateIcon);
                     break;
@@ -153,7 +153,7 @@
             tbody.append(...rows) 
         }
         
-        let remoteData =  fetch('./server/data/todos-data.json') //http://localhost:3000/api/todos - cros
+        let remoteData =  fetch('../server/data/todos-data.json') //http://localhost:3000/api/todos - cros
         remoteData
             .then(response =>{ // wait on fetch() promise
                 console.log(response);

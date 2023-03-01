@@ -31,12 +31,12 @@ function register({ id, email, userName, password}){
 
 function login(loginUser){
     const userData = getUser();
-    const matchUser = userData.find((user) => {user.userName === loginUser.userName &&
-                                               user.password === loginUser.password});
+    const matchUser = userData.find((user) => user.userName === loginUser.userName &&
+                                               user.password === loginUser.password);
     return matchUser;
 }
 
-module.export = {
+module.exports = {
 login,
 register,
 getUser
