@@ -3,7 +3,7 @@ const todosController = require('../controllers/todos-controllers.js')
 
     router.get("/api/todos", todosController.getTodos);
     
-    router.delete('/api/todos', todosController.removeTodo);
+    router.delete('/api/todos/:todoId', todosController.removeTodo);
     
     router.put("/api/todos/:todoId", todosController.updateTodo);
     

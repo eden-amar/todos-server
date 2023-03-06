@@ -1,21 +1,21 @@
-const {readFileSync, writeFileSync} = require('fs'); // return the text
+const {readFile, writeFile} = require('fs/promises'); // return the text
 
 const path = require('path');
 
-function getTodos() {
+async function getTodos() {
     const value = JSON.parse(
-        readFileSync(path.join(process.cwd(), 'data/todos-data.json'))
+        await readFile(path.resolve(__dirname, "../data/todos-data.json"))
     );
       return value;
 }
 
-function setTodos(todos){ // set the text to the new todos
+async function setTodos(todos){ // set the text to the new todos
     const value = JSON.stringify(todos);
-    writeFileSync(path.join(process.cwd(), 'data/todos-data.json'), value);
+    await writeFile(path.resolve(__dirname, "../data/todos-data.json"), value);
 }
 
-function addTodo({isDone, id, task, user}){
-    const currentTodos = getTodos();
+async function addTodo({isDone, id, task, user}){
+    const currentTodos = await getTodos();
     currentTodos.push({
     isDone,
     id:btoa(Math.random()),
@@ -25,20 +25,20 @@ function addTodo({isDone, id, task, user}){
     setTodos(currentTodos)
 }
 
-function deleteTodo(id){
-    const currentTodos = getTodos();
+async function deleteTodo(id){
+    const currentTodos = await getTodos();
     const filterTodos = currentTodos.filter(todo => todo.id !== id);
 
     setTodos(filterTodos);
 }
 
-function updateTodo(id, newTitle){
-    const currentTodos = getTodos();
+async function updateTodo(id, newTitle){
+    const currentTodos = await getTodos();
     
     const todoUpdats = currentTodos.find(todo => todo.id === id); 
     if(todoUpdats){
         todoUpdats.task  = newTitle;
-    setTodos(currentTodos);
+    await setTodos(currentTodos);
     }
 }
 

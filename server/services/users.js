@@ -1,38 +1,39 @@
 
-const {readFileSync, writeFileSync} = require('fs'); // return the text
+const {readFile, writeFile} = require('fs/promises'); // return the text
 
 const path = require("path");
 
-function getUser() {
+async function getUser() {
     const value = JSON.parse(
-        readFileSync(path.resolve(__dirname, "../data/user-data.json"))
+        await readFile(path.resolve(__dirname, "../data/user-data.json"))
     );
       return value;
 }
 
 
-function setUser(user){ // set the text to the new todos
+async function setUser(user){ // set the text to the new todos
     const value = JSON.stringify(user);
-    writeFileSync(path.resolve(__dirname, "../data/user-data.json"), value);
+    await writeFile(path.resolve(__dirname, "../data/user-data.json"), value);
 }
 
-function register({ id, email, userName, password}){
-    const currentUser = getUser();
+async function register({ id, email, userName, password}){
+    const currentUser = await getUser();
     currentUser.push({
     id:btoa(Math.random()),
     email,
     userName,
     password
     });
-    setUser(currentUser);
+    await setUser(currentUser);
 
     return {id, email, userName, password};
 }
 
-function login(loginUser){
-    const userData = getUser();
+async function login(loginUser){
+    const userData = await getUser();
     const matchUser = userData.find((user) => user.userName === loginUser.userName &&
                                                user.password === loginUser.password);
+    console.log('user:', matchUser);
     return matchUser;
 }
 
